@@ -1,3 +1,5 @@
+This package is modification for custom model with USB camera stream.
+
 # The ROS Package of Mask R-CNN for Object Detection and Segmentation
 
 This is a ROS package of [Mask R-CNN](https://arxiv.org/abs/1703.06870) algorithm for object detection and segmentation.
