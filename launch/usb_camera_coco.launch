@@ -1,0 +1,31 @@
+<launch>
+
+  <!-- Launch USB camera stream -->
+  <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen">
+    <param name="video_device" value="/dev/video0" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="yuyv" />
+    <param name="camera_frame_id" value="usb_cam" />
+    <param name="io_method" value="mmap" />
+  </node>
+
+  <!-- Show image from USB camera -->
+  <node name="image_view_camera" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/usb_cam/image_raw" />
+    <param name="autosize" value="true" />
+  </node>
+
+  <!-- Segment a image with MRCNN -->
+  <node name="mask_rcnn" pkg="mask_rcnn_ros" type="mask_rcnn_node" output="screen">
+    <remap from="~input" to="/usb_cam/image_raw" />
+    <param name="~visualization" value="true" />
+  </node>
+
+  <!-- Show result image MRCNN -->
+  <node name="image_view_result" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/mask_rcnn/visualization" />
+    <param name="autosize" value="true" />
+  </node>
+
+</launch>

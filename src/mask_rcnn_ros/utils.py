@@ -7,16 +7,19 @@ Licensed under the MIT License (see LICENSE for details)
 Written by Waleed Abdulla
 """
 
+from __future__ import division
 import sys
 import os
 import math
 import random
 import numpy as np
 import tensorflow as tf
+from scipy import ndimage
 import scipy.misc
 import skimage.color
 import skimage.io
 from six.moves.urllib import request
+from skimage.transform import resize
 import shutil
 import contextlib
 
@@ -396,10 +399,13 @@ def resize_image(image, min_dim=None, max_dim=None, padding=False):
         image_max = max(h, w)
         if round(image_max * scale) > max_dim:
             scale = max_dim / image_max
-    # Resize image and mask
+    # Resize image using bilinear interpolation
     if scale != 1:
-        image = scipy.misc.imresize(
-            image, (round(h * scale), round(w * scale)))
+        image = skimage.transform.resize(
+            image, (round(h * scale), round(w * scale)),
+            order=1, mode="constant", preserve_range=True
+        )
+            
     # Need padding?
     if padding:
         # Get new height and width
