@@ -15,7 +15,8 @@ If you want to train the model on youer own class definition or dataset, try it 
 
 
 ## Requirements
-* ROS kinetic
+* ROS kinetic, python=2.7.15
+    * If you don't have virtual env, you can make the ```conda create -n maskrcnn-ros```
 * TensorFlow 1.3+
 * Keras 2.0.8+
 * Numpy, skimage, scipy, Pillow, cython, h5py
@@ -77,8 +78,3 @@ $ ./download_example_bag.sh
 $ roslaunch example.launch
 ~~~
 
-Then RViz window will appear and show result like following:
-
-![example1](doc/mask_r-cnn_1.png)
-
-![example2](doc/mask_r-cnn_2.png)
