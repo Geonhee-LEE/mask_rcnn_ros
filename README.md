@@ -16,7 +16,7 @@ If you want to train the model on youer own class definition or dataset, try it 
 
 ## Requirements
 * ROS kinetic, python=2.7.15
-    * If you don't have virtual env, you can make the ```conda create -n maskrcnn-ros```
+    * If you don't have virtual env, you can make the ```conda create -n maskrcnn-ros python==2.7.15```
 * TensorFlow 1.3+
 * Keras 2.0.8+
 * Numpy, skimage, scipy, Pillow, cython, h5py
